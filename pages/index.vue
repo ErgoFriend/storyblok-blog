@@ -1,10 +1,6 @@
 <template>
   <section class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        storyblok-blog
-      </h1>
       <h2 class="subtitle">
         Blog with storyblok
       </h2>
@@ -20,6 +16,9 @@
           class="button--grey"
         >GitHub</a>
       </div>
+      <div v-for="story in stories" :key="story.id">
+        <a :href="story.id">{{ story.name }}</a>
+      </div>
     </div>
   </section>
 </template>
@@ -30,6 +29,16 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  async asyncData (context) {
+    let { data } = await context.app.$axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
+        params: {
+          token: 'k4ffsYRoUFU62TVSykewkwtt',
+          starts_with: 'blogs',
+          with_tag: '',
+        }
+      })
+    return { stories: data.stories }
   }
 }
 </script>
