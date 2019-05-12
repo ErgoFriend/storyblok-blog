@@ -14,7 +14,8 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: `https://fonts.googleapis.com/css?family=Noto+Sans+JP` }
     ]
   },
 
@@ -27,6 +28,7 @@ export default {
   ** Global CSS
   */
   css: [
+    { src: '~/node_modules/highlight.js/styles/atom-one-dark-reasonable.css', lang: 'css' }
   ],
 
   /*
@@ -40,7 +42,35 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/markdownit'
   ],
+
+  // [optional] markdownit options
+  // See https://github.com/markdown-it/markdown-it
+  markdownit: {
+    breaks: true, 
+    injected: true,
+    linkify: true,
+    typography: true,
+    langPrefix: true,
+    quotes: true,
+    use: [
+      'markdown-it-highlightjs',
+      ['markdown-it-container', {
+          render (tokens, idx) {
+            const token = tokens[idx]
+            const info = token.info.trim().slice(klass.length).trim()
+            if (token.nesting === 1) {
+              return `<div class="${klass} custom-block"><p class="custom-block-title">${info || defaultTitle}</p>\n`
+            } else {
+              return `</div>\n`
+            }
+          }
+      }
+    ]
+      // ['markdown-it-imsize', { autofill: true }]
+    ]
+  },
 
   /*
   ** Build configuration

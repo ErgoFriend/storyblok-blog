@@ -12,9 +12,13 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.4.1",
+    "@nuxtjs/markdownit": "^1.2.4",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.4.0",
-    "storyblok-nuxt": "^1.0.1"
+    "highlight.js": "^9.15.6",
+    "markdown-it-container": "^2.0.0",
+    "markdown-it-highlightjs": "^3.0.0",
+    "markdown-it-imsize": "^2.0.1",
+    "nuxt": "^2.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

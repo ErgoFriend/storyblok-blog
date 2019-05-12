@@ -31,7 +31,7 @@ export default {
     Logo
   },
   async asyncData (context) {
-    let { data } = await context.app.$axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
+    const { data } = await context.app.$axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
         params: {
           token: 'k4ffsYRoUFU62TVSykewkwtt',
           starts_with: 'blogs',

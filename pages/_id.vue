@@ -1,6 +1,9 @@
 <template>
-    <div>
+    <div class="story">
+        <h2 class="subtitle">
         {{ story.name }}
+      </h2>
+        <div v-html="$md.render(story.content.body)"></div>
     </div>
 </template>
 <script>
@@ -13,6 +16,11 @@ export default {
             }
         })
         return { story: data.story }
-  }
+    }
 }
 </script>
+<style scoped>
+.story {
+    margin: 20px;
+}
+</style>
