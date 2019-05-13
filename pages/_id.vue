@@ -13,6 +13,7 @@ export default {
         const { data } = await context.app.$axios.get(dst_url, {
             params: {
                 token: 'k4ffsYRoUFU62TVSykewkwtt',
+                cv: 'CURRENT_TIMESTAMP'
             }
         })
         return { story: data.story }

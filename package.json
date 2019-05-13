@@ -18,7 +18,12 @@
     "markdown-it-container": "^2.0.0",
     "markdown-it-highlightjs": "^3.0.0",
     "markdown-it-imsize": "^2.0.1",
-    "nuxt": "^2.4.0"
+    "markdown-it-link-attributes": "^2.1.0",
+    "markdown-it-prism": "^2.0.1",
+    "markdown-it-table-of-contents": "^0.4.4",
+    "nuxt": "^2.4.0",
+    "prism-themes": "^1.1.0",
+    "vue-highlight.js": "^3.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

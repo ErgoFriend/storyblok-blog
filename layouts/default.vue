@@ -54,6 +54,7 @@ html {
 
 code {
   font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
+  font-size: 13.5px;
 }
 
 .content code {

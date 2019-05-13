@@ -56,18 +56,19 @@ export default {
     quotes: true,
     use: [
       'markdown-it-highlightjs',
-      ['markdown-it-container', {
-          render (tokens, idx) {
-            const token = tokens[idx]
-            const info = token.info.trim().slice(klass.length).trim()
-            if (token.nesting === 1) {
-              return `<div class="${klass} custom-block"><p class="custom-block-title">${info || defaultTitle}</p>\n`
-            } else {
-              return `</div>\n`
-            }
+      'markdown-it-table-of-contents',
+      ['markdown-it-container', 'tip', {
+        render: function (tokens, idx) {
+          const klass = 'tip'
+          const token = tokens[idx]
+          const info = token.info.trim().slice(klass.length).trim()
+          if (token.nesting === 1) {
+            return `<div class="${klass} custom-block"><p class="custom-block-title">${info || 'defaultTitle'}</p>\n`
+          } else {
+            return `</div>\n`
           }
-      }
-    ]
+        }
+      }],
       // ['markdown-it-imsize', { autofill: true }]
     ]
   },
