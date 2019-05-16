@@ -211,7 +211,7 @@ div[class~="hljs trueyaml"]:before {
 div[class~="hljs truepy"]:before {
   content: 'py';
 }
-div[class~="hljs truejavascript"]:before {
+div[class~="hljs truejs"]:before {
   content: "js";
 }
 div[class~="hljs truetypescript"]:before {
