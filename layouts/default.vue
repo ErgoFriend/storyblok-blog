@@ -16,6 +16,10 @@ html {
   box-sizing: border-box;
 }
 
+a{
+   word-break: break-all;
+}
+
 *,
 *:before,
 *:after {
@@ -57,185 +61,6 @@ code {
   font-size: 13.5px;
 }
 
-.content code {
-  color: #476582;
-  padding: 0.25rem 0.5rem;
-  margin: 0;
-  font-size: 0.85em;
-  background-color: rgba(27,31,35,0.05);
-  border-radius: 3px;
-}
-.content pre,
-.content pre[class*="hljs"] {
-  line-height: 1.4;
-  padding: 1.25rem 1.5rem;
-  margin: 0.85rem 0;
-  background-color: #282c34;
-  border-radius: 6px;
-  overflow: auto;
-}
-.content pre code,
-.content pre[class*="hljs true"] code {
-  color: #fff;
-  padding: 0;
-  background-color: transparent;
-  border-radius: 0;
-}
-div[class*="hljs true"] {
-  position: relative;
-  background-color: #282c34;
-  border-radius: 6px;
-}
-div[class*="hljs true"] .highlight-lines {
-  user-select: none;
-  padding-top: 1.3rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  line-height: 1.4;
-}
-div[class*="hljs true"] .highlight-lines .highlighted {
-  background-color: rgba(0,0,0,0.66);
-}
-div[class*="hljs true"] pre,
-div[class*="hljs true"] pre[class*="hljs true"] {
-  background: transparent;
-  position: relative;
-  z-index: 1;
-}
-div[class*="hljs true"]::before {
-  position: absolute;
-  z-index: 3;
-  top: 0.8em;
-  right: 1em;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
-}
-div[class*="hljs true"]:not(.line-numbers-mode) .line-numbers-wrapper {
-  display: none;
-}
-div[class*="hljs true"].line-numbers-mode .highlight-lines .highlighted {
-  position: relative;
-}
-div[class*="hljs true"].line-numbers-mode .highlight-lines .highlighted:before {
-  content: ' ';
-  position: absolute;
-  z-index: 3;
-  left: 0;
-  top: 0;
-  display: block;
-  width: 3.5rem;
-  height: 100%;
-  background-color: rgba(0,0,0,0.66);
-}
-div[class*="hljs true"].line-numbers-mode pre {
-  padding-left: 4.5rem;
-  vertical-align: middle;
-}
-div[class*="hljs true"].line-numbers-mode .line-numbers-wrapper {
-  position: absolute;
-  top: 0;
-  width: 3.5rem;
-  text-align: center;
-  color: rgba(255,255,255,0.3);
-  padding: 1.25rem 0;
-  line-height: 1.4;
-}
-div[class*="hljs true"].line-numbers-mode .line-numbers-wrapper br {
-  user-select: none;
-}
-div[class*="hljs true"].line-numbers-mode .line-numbers-wrapper .line-number {
-  position: relative;
-  z-index: 4;
-  user-select: none;
-  font-size: 0.85em;
-}
-div[class*="hljs true"].line-numbers-mode::after {
-  content: '';
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 3.5rem;
-  height: 100%;
-  border-radius: 6px 0 0 6px;
-  border-right: 1px solid rgba(0,0,0,0.66);
-  background-color: #282c34;
-}
-div[class~="hljs truejs"]:before {
-  content: 'js';
-}
-div[class~="hljs truets"]:before {
-  content: 'ts';
-}
-div[class~="hljs truehtml"]:before {
-  content: 'html';
-}
-div[class~="hljs truemd"]:before {
-  content: 'md';
-}
-div[class~="hljs truevue"]:before {
-  content: 'vue';
-}
-div[class~="hljs truecss"]:before {
-  content: 'css';
-}
-div[class~="hljs truesass"]:before {
-  content: 'sass';
-}
-div[class~="hljs truescss"]:before {
-  content: 'scss';
-}
-div[class~="hljs trueless"]:before {
-  content: 'less';
-}
-div[class~="hljs truestylus"]:before {
-  content: 'stylus';
-}
-div[class~="hljs truego"]:before {
-  content: 'go';
-}
-div[class~="hljs truejava"]:before {
-  content: 'java';
-}
-div[class~="hljs truec"]:before {
-  content: 'c';
-}
-div[class~="hljs truesh"]:before {
-  content: 'sh';
-}
-div[class~="hljs trueyaml"]:before {
-  content: 'yaml';
-}
-div[class~="hljs truepy"]:before {
-  content: 'py';
-}
-div[class~="hljs truejs"]:before {
-  content: "js";
-}
-div[class~="hljs truetypescript"]:before {
-  content: "ts";
-}
-div[class~="hljs truemarkup"]:before {
-  content: "html";
-}
-div[class~="hljs truemarkdown"]:before {
-  content: "md";
-}
-div[class~="hljs truejson"]:before {
-  content: "json";
-}
-div[class~="hljs trueruby"]:before {
-  content: "rb";
-}
-div[class~="hljs truepython"]:before {
-  content: "py";
-}
-div[class~="hljs truebash"]:before {
-  content: "sh";
-}
-
 .custom-block .custom-block-title {
   font-weight: 600;
   margin-bottom: -0.4rem;
@@ -275,4 +100,178 @@ div[class~="hljs truebash"]:before {
   color: #2c3e50;
 }
 
+</style>
+<style lang="stylus">
+// colors
+$accentColor = #1565C0
+$textColor = #2c3e50
+$borderColor = #eaecef
+$codeBgColor = #282c34
+$arrowBgColor = #ccc
+
+// layout
+$navbarHeight = 3.6rem
+$sidebarWidth = 20rem
+$contentWidth = 740px
+
+// responsive breakpoints
+$MQNarrow = 959px
+$MQMobile = 719px
+$MQMobileNarrow = 419px
+
+// code
+$lineNumbersWrapperWidth = 3.5rem
+$codeLang = js ts html md vue css sass scss less stylus go java c sh yaml py
+
+a
+  font-weight 500
+  color $accentColor
+  text-decoration none
+
+h1, h2, h3, h4, h5, h6
+  font-weight 600
+  line-height 1.25
+  .content:not(.custom) > &
+    margin-top (0.5rem - $navbarHeight)
+    padding-top ($navbarHeight + 1rem)
+    margin-bottom 0
+    &:first-child
+      margin-top -1.5rem
+      margin-bottom 1rem
+      + p, + pre, + .custom-block
+        margin-top 2rem
+  &:hover .header-anchor
+    opacity: 1
+
+p
+  code
+    color lighten($textColor, 20%)
+    padding 0.25rem 0.5rem
+    margin 0
+    font-size 0.85em
+    background-color rgba(27,31,35,0.05)
+    border-radius 3px
+
+.content
+  pre, pre[class*="language-"]
+    line-height 1.4
+    padding 1.25rem 1.5rem
+    margin 0.85rem 0
+    background-color $codeBgColor
+    border-radius 6px
+    overflow auto
+    code
+      color #fff
+      padding 0
+      background-color transparent
+      border-radius 0
+
+div[class*="language-"]
+  color #d3d3d3
+  position relative
+  background-color $codeBgColor
+  border-radius 6px
+  .highlight-lines
+    user-select none
+    padding-top 1.3rem
+    position absolute
+    top 0
+    left 0
+    width 100%
+    line-height 1.4
+    .highlighted
+      background-color rgba(0, 0, 0, 66%)
+  pre, pre[class*="language-"]
+    overflow-x: auto;
+    line-height: 1.2;
+    padding: 1rem 1rem;
+    background transparent
+    position relative
+    z-index 1
+  &::before
+    position absolute
+    z-index 3
+    top 0.8em
+    right 1em
+    font-size 0.75rem
+    color rgba(255, 255, 255, 0.4)
+  &:not(.line-numbers-mode)
+    .line-numbers-wrapper
+      display none
+  &.line-numbers-mode
+    .highlight-lines .highlighted
+        position relative
+        &:before
+          content ' '
+          position absolute
+          z-index 3
+          left 0
+          top 0
+          display block
+          width $lineNumbersWrapperWidth
+          height 100%
+          background-color rgba(0, 0, 0, 66%)
+    pre
+      padding-left $lineNumbersWrapperWidth + 1 rem
+      vertical-align middle
+    .line-numbers-wrapper
+      position absolute
+      top 0
+      width $lineNumbersWrapperWidth
+      text-align center
+      color rgba(255, 255, 255, 0.3)
+      padding 1.25rem 0
+      line-height 1.4
+      br
+        user-select none
+      .line-number
+        position relative
+        z-index 4
+        user-select none
+        font-size 0.85em
+    &::after
+      content ''
+      position absolute
+      z-index 2
+      top 0
+      left 0
+      width $lineNumbersWrapperWidth
+      height 100%
+      border-radius 6px 0 0 6px
+      border-right 1px solid rgba(0, 0, 0, 66%)
+      background-color $codeBgColor
+
+
+for lang in $codeLang
+  div{'[class~="language-' + lang + '"]'}
+    &:before
+      content ('' + lang)
+
+div[class~="language-javascript"]
+  &:before
+    content "js"
+
+div[class~="language-typescript"]
+  &:before
+    content "ts"
+
+div[class~="language-markup"]
+  &:before
+    content "html"
+
+div[class~="language-markdown"]
+  &:before
+    content "md"
+
+div[class~="language-json"]:before
+  content "json"
+
+div[class~="language-ruby"]:before
+  content "rb"
+
+div[class~="language-python"]:before
+  content "py"
+
+div[class~="language-bash"]:before
+  content "sh"
 </style>

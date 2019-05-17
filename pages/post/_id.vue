@@ -1,8 +1,8 @@
 <template>
     <div class="story">
         <h2 class="subtitle">
-        {{ story.name }}
-      </h2>
+            {{ story.name }}
+        </h2>
         <div v-html="$md.render('[[toc]]\n' + story.content.body)"></div>
     </div>
 </template>
@@ -13,7 +13,7 @@ export default {
         const { data } = await context.app.$axios.get(dst_url, {
             params: {
                 token: 'k4ffsYRoUFU62TVSykewkwtt',
-                cv: 'CURRENT_TIMESTAMP'
+                resolve_relations: 'categories',
             }
         })
         return { story: data.story }

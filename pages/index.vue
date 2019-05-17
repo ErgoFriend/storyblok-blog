@@ -4,12 +4,14 @@
       <h2 class="subtitle">
         かす.dev
       </h2>
-      <div v-for="tag in tags" :key="tag.name">
-        <p>{{ tag.name }}</p>
-        <p>{{ tag.taggings_count }}</p>
+      <div v-for="category in categories" :key="category.uuid">
+        <nuxt-link :to="{name:'category-id', params: { id: category.uuid }}">{{ category.name }}</nuxt-link>
       </div>
-      <div v-for="story in stories" :key="story.id">
-        <a :href="story.id">{{ story.name }}</a>
+      <div v-for="tag in tags" :key="tag.name">
+        <nuxt-link :to="{name:'tag-id', params: { id: tag.name }}">{{ tag.name }}: {{ tag.taggings_count }}</nuxt-link>
+      </div>
+      <div v-for="post in posts" :key="post.id">
+        <nuxt-link :to="{name:'post-id', params: { id: post.id }}">{{ post.name }}</nuxt-link>
       </div>
     </div>
   </section>
@@ -23,22 +25,33 @@ export default {
     Logo
   },
   async asyncData (context) {
-    const { tags_data } = await context.app.$axios.get(`https://api.storyblok.com/v1/cdn/tags`, {
-        params: {
-          token: 'k4ffsYRoUFU62TVSykewkwtt',
-        }
-      })
     const { data } = await context.app.$axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
-        params: {
-          token: 'k4ffsYRoUFU62TVSykewkwtt',
-          starts_with: 'blogs',
-          with_tag: '',
-        }
-      })
-    return {
-      stories: data.stories,
-      tags: tags_data.tags,
+      params: {
+        token: 'k4ffsYRoUFU62TVSykewkwtt',
+        starts_with: 'blogs',
+        resolve_relations: 'categories',
       }
+    })
+    return {
+      posts: data.stories,
+      categories: null,
+      tags: null,
+      }
+  },
+  async mounted() {
+    const categories_data = await this.$axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
+      params: {
+        token: 'k4ffsYRoUFU62TVSykewkwtt',
+        starts_with: 'categories',
+      }
+    })
+    const tags_data = await this.$axios.get(`https://api.storyblok.com/v1/cdn/tags`, {
+      params: {
+        token: 'k4ffsYRoUFU62TVSykewkwtt',
+      }
+    })
+    this.tags = tags_data.data.tags
+    this.categories = categories_data.data.stories
   }
 }
 </script>

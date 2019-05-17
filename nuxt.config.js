@@ -1,5 +1,4 @@
 import pkg from './package'
-
 export default {
   mode: 'universal',
 
@@ -57,6 +56,22 @@ export default {
     html: true,
     typographer: true,
     quotes: true,
+    highlight: function (str, lang) {
+      var hljs = require('highlight.js')
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return '<div class="language-'+lang+' extra-class"><pre class="language-'+lang+'"><code>' +
+                 hljs.highlight(lang, str, true).value +
+                 '</code></pre></div>';
+          // return `<!--beforebegin--><div class="language-${lang} extra-class"><!--afterbegin-->` +
+          // '<pre class="hljs"><code>' +
+          //     hljs.highlight(lang, str, true).value +
+          //     '</code></pre>' + `<!--beforeend--></div><!--afterend-->`
+        } catch (__) {}
+      }
+  
+      return '<div class="language extra-class"><pre class="language"><code>' + md.utils.escapeHtml(str) + '</code></pre></div>';
+    },
     use: [
       ['markdown-it-named-headers',{
         slugify: function (header) {
@@ -67,7 +82,7 @@ export default {
               .replace(/\-+$/, ''); // Replace trailing hyphen
         }
       }],
-      'markdown-it-highlightjs',
+      // 'markdown-it-highlightjs',
       ['markdown-it-table-of-contents', {includeLevel: [1,2,3]}],
       ['markdown-it-container', 'tip', {
         render: function (tokens, idx) {
