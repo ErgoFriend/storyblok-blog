@@ -2,19 +2,11 @@
   <section class="container">
     <div>
       <h2 class="subtitle">
-        Blog with storyblok
+        かす.dev
       </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >GitHub</a>
+      <div v-for="tag in tags" :key="tag.name">
+        <p>{{ tag.name }}</p>
+        <p>{{ tag.taggings_count }}</p>
       </div>
       <div v-for="story in stories" :key="story.id">
         <a :href="story.id">{{ story.name }}</a>
@@ -31,6 +23,11 @@ export default {
     Logo
   },
   async asyncData (context) {
+    const { tags_data } = await context.app.$axios.get(`https://api.storyblok.com/v1/cdn/tags`, {
+        params: {
+          token: 'k4ffsYRoUFU62TVSykewkwtt',
+        }
+      })
     const { data } = await context.app.$axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
         params: {
           token: 'k4ffsYRoUFU62TVSykewkwtt',
@@ -38,7 +35,10 @@ export default {
           with_tag: '',
         }
       })
-    return { stories: data.stories }
+    return {
+      stories: data.stories,
+      tags: tags_data.tags,
+      }
   }
 }
 </script>

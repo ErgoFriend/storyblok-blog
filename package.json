@@ -11,14 +11,18 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxt/http": "^0.1.2",
     "@nuxtjs/axios": "^5.4.1",
     "@nuxtjs/markdownit": "^1.2.4",
     "cross-env": "^5.2.0",
     "highlight.js": "^9.15.6",
     "markdown-it-container": "^2.0.0",
+    "markdown-it-github-headings": "^1.1.1",
     "markdown-it-highlightjs": "^3.0.0",
     "markdown-it-imsize": "^2.0.1",
     "markdown-it-link-attributes": "^2.1.0",
+    "markdown-it-named-headers": "^0.0.4",
+    "markdown-it-named-headings": "^1.1.0",
     "markdown-it-prism": "^2.0.1",
     "markdown-it-table-of-contents": "^0.4.4",
     "nuxt": "^2.4.0",

@@ -3,7 +3,7 @@
         <h2 class="subtitle">
         {{ story.name }}
       </h2>
-        <div v-html="$md.render(story.content.body)"></div>
+        <div v-html="$md.render('[[toc]]\n' + story.content.body)"></div>
     </div>
 </template>
 <script>

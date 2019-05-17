@@ -42,6 +42,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    '@nuxt/http',
     '@nuxtjs/markdownit'
   ],
 
@@ -53,17 +54,52 @@ export default {
     linkify: true,
     typography: true,
     langPrefix: true,
+    html: true,
+    typographer: true,
     quotes: true,
     use: [
+      ['markdown-it-named-headers',{
+        slugify: function (header) {
+          return encodeURI(header.trim()
+              .toLowerCase()
+              .replace(/[\]\[\!\"\#\$\%\&\'\(\)\*\+\,\.\/\:\;\<\=\>\?\@\\\^\_\{\|\}\~]/g, '')
+              .replace(/\s+/g, '-')) // Replace spaces with hyphens
+              .replace(/\-+$/, ''); // Replace trailing hyphen
+        }
+      }],
       'markdown-it-highlightjs',
-      'markdown-it-table-of-contents',
+      ['markdown-it-table-of-contents', {includeLevel: [1,2,3]}],
       ['markdown-it-container', 'tip', {
         render: function (tokens, idx) {
           const klass = 'tip'
           const token = tokens[idx]
           const info = token.info.trim().slice(klass.length).trim()
           if (token.nesting === 1) {
-            return `<div class="${klass} custom-block"><p class="custom-block-title">${info || 'defaultTitle'}</p>\n`
+            return `<div class="${klass} custom-block"><p class="custom-block-title">${info || 'TIP'}</p>\n`
+          } else {
+            return `</div>\n`
+          }
+        }
+      }],
+      ['markdown-it-container', 'danger', {
+        render: function (tokens, idx) {
+          const klass = 'danger'
+          const token = tokens[idx]
+          const info = token.info.trim().slice(klass.length).trim()
+          if (token.nesting === 1) {
+            return `<div class="${klass} custom-block"><p class="custom-block-title">${info || 'Danger'}</p>\n`
+          } else {
+            return `</div>\n`
+          }
+        }
+      }],
+      ['markdown-it-container', 'warning', {
+        render: function (tokens, idx) {
+          const klass = 'warning'
+          const token = tokens[idx]
+          const info = token.info.trim().slice(klass.length).trim()
+          if (token.nesting === 1) {
+            return `<div class="${klass} custom-block"><p class="custom-block-title">${info || 'Warning'}</p>\n`
           } else {
             return `</div>\n`
           }
