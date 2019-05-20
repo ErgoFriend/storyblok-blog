@@ -16,6 +16,13 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+
 a{
    word-break: break-all;
 }
