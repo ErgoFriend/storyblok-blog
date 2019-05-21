@@ -8,7 +8,7 @@ export const state = () => ({
     },
     dark_mode: {
         background_color: "#0B1218",
-        text_color: "#FFFFFF",
+        text_color: "#e2e2e2",
         twitter_color: "#182464",
         card_color: "#182533",
     },

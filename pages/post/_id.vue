@@ -1,13 +1,21 @@
 <template>
-    <div class="story">
-        <h2 class="subtitle">
+    <div class="story" :style="{background:default_mode.card_color}">
+        <h2 class="subtitle" :style="{color:default_mode.text_color}">
             {{ story.name }}
         </h2>
-        <div v-html="$md.render('[[toc]]\n' + story.content.body)"></div>
+        <ModeButton/>
+        <div v-html="$md.render('[[toc]]\n' + story.content.body)" :style="{color:default_mode.text_color}">></div>
     </div>
 </template>
 <script>
+import { mapState,mapMutations } from 'vuex'
+
+import ModeButton from '~/components/ModeButton.vue'
+
 export default {
+    components: {
+        ModeButton
+    },
     async asyncData (context) {
         const dst_url = 'https://api.storyblok.com/v1/cdn/stories/' + context.params.id
         const { data } = await context.app.$axios.get(dst_url, {
@@ -17,11 +25,15 @@ export default {
             }
         })
         return { story: data.story }
-    }
+    },
+    computed: {
+        ...mapState('theme',['default_mode'])
+    },
 }
 </script>
 <style scoped>
 .story {
-    margin: 20px;
+    padding: 20px;
+    min-height: 100vh;
 }
 </style>

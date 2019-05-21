@@ -4,7 +4,7 @@
       <h2 class="subtitle" :style="{color:default_mode.text_color}">
         かす.dev
       </h2>
-      <button @click="isDark">ダークモード</button>
+      <ModeButton/>
       <h4>カテゴリー</h4>
       <div class="categories">
         <div class="category" v-for="category in categories" :key="category.uuid">
@@ -29,11 +29,11 @@
 <script>
 import { mapState,mapMutations } from 'vuex'
 
-import Logo from '~/components/Logo.vue'
+import ModeButton from '~/components/ModeButton.vue'
 
 export default {
   components: {
-    Logo
+    ModeButton
   },
   data() {
     return {
