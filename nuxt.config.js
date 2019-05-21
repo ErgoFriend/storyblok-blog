@@ -1,4 +1,6 @@
 import pkg from './package'
+const axios = require('axios') 
+
 export default {
   mode: 'universal',
 
@@ -6,11 +8,54 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'かす.devのブログ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'かす.devのブログ'
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'blog.かす.dev'
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: 'https://example.com'
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'blog.かす.dev'
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'かす.devのブログ'
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://pbs.twimg.com/profile_images/1113409125126246401/gM_CUTiK_400x400.png'
+      },
+      // Twitter
+      {
+        name: 'twitter:card',
+        content: 'summary'
+      },
+      {
+        name: 'twitter:site',
+        content: '@ergofriend'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -122,6 +167,26 @@ export default {
       }],
       // ['markdown-it-imsize', { autofill: true }]
     ]
+  },
+  generate: {
+    fallback: true,
+    routes: function () {
+      return axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
+        params: {
+            token: 'k4ffsYRoUFU62TVSykewkwtt',
+            resolve_relations: 'categories',
+        }
+        }).then(res => {
+          return res.data.stories.map(post => {
+            const type = /blogs/.test(post.full_slug) ? 'post' : 'category'
+            console.log(type+': '+post.name)
+            return {
+              route: '/'+type+'/' + post.id,
+              payload: post
+            };
+        })
+      })
+    }
   },
 
   /*

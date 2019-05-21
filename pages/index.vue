@@ -5,22 +5,24 @@
         かす.dev
       </h2>
       <ModeButton/>
-      <h4>カテゴリー</h4>
+      <h4 :style="{color:default_mode.text_color}">カテゴリー</h4>
       <div class="categories">
         <div class="category" v-for="category in categories" :key="category.uuid">
           <nuxt-link :to="{name:'category-id', params: { id: category.uuid }}">{{ category.name }}</nuxt-link>
         </div>
       </div>
-      <h4>新着</h4>
-      <div v-for="post in posts" :key="post.id" :style="{background:default_mode.card_color}">
+      <h4 :style="{color:default_mode.text_color}">新着</h4>
+      <div class="post" v-for="post in posts" :key="post.id" :style="{background:default_mode.card_color}">
         <nuxt-link :to="{name:'post-id', params: { id: post.id }}">
           <p class="post_title">{{ post.name }}</p>
           <p class="post_summary">{{ post.content.summary }}</p>
         </nuxt-link>
       </div>
-      <h4>タグ</h4>
-      <div v-for="tag in tags" :key="tag.name">
-        <nuxt-link :to="{name:'tag-id', params: { id: tag.name }}">{{ tag.name }}: {{ tag.taggings_count }}</nuxt-link>
+      <h4 :style="{color:default_mode.text_color}">タグ</h4>
+      <div class="tags">
+        <div class="tag" v-for="tag in tags" :key="tag.name">
+          <nuxt-link :to="{name:'tag-id', params: { id: tag.name }}">{{ tag.name }}: {{ tag.taggings_count }}</nuxt-link>
+        </div>
       </div>
     </div>
   </section>
@@ -71,13 +73,10 @@ export default {
   computed: {
       ...mapState('theme',['default_mode'])
   },
-  methods: {
-    ...mapMutations('theme',['isDark']),
-  }
 }
 </script>
 
-<style>
+<style lang="scss">
 .container {
   margin: 0;
   min-height: 100vh;
@@ -85,16 +84,6 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  /* color: #35495e; */
-  letter-spacing: 1px;
 }
 
 .subtitle {
@@ -111,16 +100,34 @@ export default {
 
 .categories {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .category{
   padding: 0 20px;
 }
 
-.post_title {
-  font-size: 20px;
+.post {
+  margin: 15px 0;
+  padding: 5px 20px; 
+  .post_title {
+    font-size: 20px;
+  }
+  .post_summary {
+    font-size: 15px;
+  }
 }
-.post_summary {
-  font-size: 15px;
+
+
+.tags{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  .tag{
+    margin: 0 15px;
+  }
 }
 </style>

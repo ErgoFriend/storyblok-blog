@@ -17,7 +17,7 @@ export default {
         ModeButton
     },
     async asyncData (context) {
-        const dst_url = 'https://api.storyblok.com/v1/cdn/stories/' + context.params.id
+        const dst_url = 'https://api.storyblok.com/v1/cdn/stories/' + (context.payload ? context.payload.id : context.params.id)
         const { data } = await context.app.$axios.get(dst_url, {
             params: {
                 token: 'k4ffsYRoUFU62TVSykewkwtt',
