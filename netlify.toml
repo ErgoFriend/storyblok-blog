@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "https://brog.netlify.com/*"
+  to = "https://blog.kasu.dev/*"
+  status = 301
