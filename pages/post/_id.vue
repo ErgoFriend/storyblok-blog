@@ -1,5 +1,5 @@
 <template>
-    <div class="story" :style="{background:default_mode.card_color}">
+    <div class="story" :style="{background:default_mode.background_color}">
         <h2 class="subtitle" :style="{color:default_mode.text_color}">
             {{ story.name }}
         </h2>

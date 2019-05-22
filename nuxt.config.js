@@ -3,12 +3,15 @@ const axios = require('axios')
 
 export default {
   mode: 'universal',
-
+  env: {
+    BASE_URL: 'https://blog.kasu.dev',
+    META_TITLE: 'かすのブログ',
+  },
   /*
   ** Headers of the page
   */
   head: {
-    title: 'かす.devのブログ',
+    title: process.env.META_TITLE,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -20,7 +23,7 @@ export default {
       {
         hid: 'og:site_name',
         property: 'og:site_name',
-        content: 'blog.かす.dev'
+        content: process.env.META_TITLE
       },
       {
         hid: 'og:type',
@@ -30,12 +33,12 @@ export default {
       {
         hid: 'og:url',
         property: 'og:url',
-        content: 'https://example.com'
+        content: process.env.BASE_URL
       },
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'blog.かす.dev'
+        content: process.env.META_TITLE
       },
       {
         hid: 'og:description',
@@ -50,7 +53,7 @@ export default {
       // Twitter
       {
         name: 'twitter:card',
-        content: 'summary'
+        content: 'summary_large_image'
       },
       {
         name: 'twitter:site',
@@ -66,7 +69,10 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: {
+    color: '#1565c0',
+    height: '3px'
+  },
 
   /*
   ** Global CSS
@@ -86,9 +92,14 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxt/http',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/sitemap'
   ],
+
+  googleAnalytics: {
+    id: 'UA-126788290-2'
+  },
 
   // [optional] markdownit options
   // See https://github.com/markdown-it/markdown-it
@@ -118,6 +129,11 @@ export default {
       return '<div class="language extra-class"><pre class="language"><code>' + md.utils.escapeHtml(str) + '</code></pre></div>';
     },
     use: [
+      ['markdown-it-link-attributes',{
+        attrs: {
+          target: '_blank',
+          rel: 'noopener'
+      }}],
       ['markdown-it-named-headers',{
         slugify: function (header) {
           return encodeURI(header.trim()
@@ -184,6 +200,27 @@ export default {
               route: '/'+type+'/' + post.id,
               payload: post
             };
+        })
+      })
+    }
+  },
+  sitemap: {
+    hostname: process.env.BASE_URL,
+    gzip: true,
+    generate: true, // 静的ジェネレート時にも利用
+    exclude: [
+      '/404*', // 404ページは除く
+    ],
+    routes: function () {
+      return axios.get(`https://api.storyblok.com/v1/cdn/stories`, {
+        params: {
+            token: 'k4ffsYRoUFU62TVSykewkwtt',
+            resolve_relations: 'categories',
+        }
+        }).then(res => {
+          return res.data.stories.map(post => {
+            const type = /blogs/.test(post.full_slug) ? 'post' : 'category'
+            return '/'+type+'/' + post.id;
         })
       })
     }

@@ -13,27 +13,22 @@
   "dependencies": {
     "@nuxt/http": "^0.1.2",
     "@nuxtjs/axios": "^5.4.1",
+    "@nuxtjs/google-analytics": "^2.2.0",
     "@nuxtjs/markdownit": "^1.2.4",
+    "@nuxtjs/sitemap": "^1.2.0",
     "cross-env": "^5.2.0",
     "highlight.js": "^9.15.6",
     "markdown-it-container": "^2.0.0",
-    "markdown-it-github-headings": "^1.1.1",
-    "markdown-it-highlightjs": "^3.0.0",
-    "markdown-it-imsize": "^2.0.1",
     "markdown-it-link-attributes": "^2.1.0",
     "markdown-it-named-headers": "^0.0.4",
-    "markdown-it-named-headings": "^1.1.0",
-    "markdown-it-prism": "^2.0.1",
     "markdown-it-table-of-contents": "^0.4.4",
-    "node-sass": "^4.12.0",
-    "nuxt": "^2.4.0",
-    "prism-themes": "^1.1.0",
-    "sass-loader": "^7.1.0",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2",
-    "vue-highlight.js": "^3.1.0"
+    "nuxt": "^2.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
   }
 }
